@@ -145,10 +145,6 @@ pcanalysis <- function(combis, zona, bandas){
     file.path(output_path,out_filename),
     bylayer = F, options=c("COMPRESS=LZW", "PREDICTOR=3")
   )
-  
-  # Garbage collection
-  gc()
-
 }
 
 # 3. Funciones para exportar resultados
@@ -207,7 +203,7 @@ writeStats <- function(pca,output_path,filename,statsColnames){
 # _________________________________________________________________________
 
 # Importar el archivo csv
-ids_path <- file.path('E:',"arqueologia_2022","celsa_dron","scripts","GDAL_R",
+ids_path <- file.path('E:',"arqueologia_2022","celsa_dron","scripts","GDAL_Python",
                       "mosaics_ids.csv")
 mosaic_ids <- read.csv(ids_path, header=T)
 
@@ -230,124 +226,14 @@ zonas = c("Yacimiento")
 for(zona in zonas){
   for(i in seq(42,length(mosaic_ids[,1]))){ 
     inicio <- Sys.time()
-    # Save roe
+    # Save row
     row <- mosaic_ids[i,]
     # Compute PCA
     pcanalysis(row,zona,bandas)
     # Tiempo de ejecucion
     print(inicio-Sys.time())
+    # Clean storage
+    gc()
   }
   remove(row)
 }
-
-mosaic_ids[19,]
-
-row <- mosaic_ids[1,]
-
-treat <- row$band_pretreatmeant
-
-
-pathResults <- getPaths(mosaic_ids[1,], zonas[1], bandas)
-
-mosaic.test <- createMosaic(pathResults[['paths']])
-mosaic.test
-
-mosaic.df <- as.data.frame(mosaic.test)
-# Convert NAs to 0
-mosaic.df[is.na(mosaic.df)] <- 0
-pca <- prcomp(mosaic.df, scale.=TRUE)
-
-testPCA <- pcanalysis(mosaiccc,pathResults[[2]][[1]],pathResults[[3]])
-
-# Recursive test
-mosaic <- data.frame("a" = c(1,2,3), "b" = c(4,5,6), "f" = c(4,5,6), "j" = c(4,5,6))
-
-toAdd <- data.frame("z" = c(7,8,9), "y" = c(0,0,0))
-
-
-# todo: guardar id de las columnas con NA
-# una vez hecho el PCA, cambiarlas otra vez por NAs
-
-
-
-
-pathResults[[1]]
-
-
-
-
-
-
-
-
-
-combis <- mosaic_ids[1,]
-zona <- zonas[1]
-
-# Generar informacion a partir de las bandas integradas en la combinacion
-pathResults <- getPaths(combis, zona, bandas)
-
-bandnames <- pathResults[['bandnames']][[1]]
-output_path <- pathResults[['outputPath']]
-filename <- pathResults[['outputFilename']]
-
-cat("\n\nCreate ACP ",filename,
-    "\n_________________________________________________________\n\n")
-
-cat("..Crear mosaico\n")
-# Generar mosaico
-mosaic <- createMosaic(pathResults[['paths']])
-
-# Transformar la imagen en un DF
-cat("..Transformarlo en un DF\n")
-mosaic.df <- as.data.frame(mosaic)
-names(mosaic.df) <- bandnames
-cat("..Convertir NAs en valores 0\n")
-mosaic.df[is.na(mosaic.df)] <- 0
-
-# Run PCA
-cat("..Realizar ACP\n")
-pca <- prcomp(mosaic.df, scale.=TRUE)
-
-# Obtener el numero de bandas de la imagen
-nBands <- length(bandnames)
-
-# Save PCs
-cat("..Guardar componentes\n")
-#mosaic.pc <- pca$x
-
-# Obtener un vector con el nombre de los PCs
-colNamesPC <- retrievePCnames(pca)
-
-mosaic <- data.frame(
-  'red'=seq(1,20,5),
-  'green'=seq(1,20,5),
-  'blue'=seq(1,20,5)
-)
-
-pcs <- data.frame(
-  'PC1'=seq(1,20,5),
-  'PC2'=seq(1,20,5),
-  'PC3'=seq(1,20,5)
-)
-
-pca$x <- pcs
-
-# Insert each PC inside the original raster
-for(pc in seq(1,nBands)){
-  cat('....Componente ',pc,'\n')
-  newColumn <- colNamesPC[pc]
-  mosaic[newColumn] <- pca$x[,pc]
-}
-
-newColumn <- "PC3"
-
-ancientNames <- names(mosaic)
-
-newColNames <- append(ancientNames,colNamesPC)
-
-newColNames
-mosaic[[newColumn]] <- pca$x[,2]
-cbind(mosaic, newColumn = pca$x[,2])
-
-names(mosaic) <- c("a","b","c","d","e")
