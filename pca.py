@@ -303,7 +303,7 @@ def write_stats(eigenvals, eigenvectors, outfile, outformat: str = "json"):
         pca_stats = [] # csv rows
         # Add header. Same columns as number of bands
         header_bandnames = ["band_" + str(band + 1) for band in range(0, n_bands)]
-        header = '"stat_name,"' + '"' + ('","').join(header_bandnames) + '"'
+        header = '"stat_name",' + '"' + ('","').join(header_bandnames) + '"'
         pca_stats.append(header)
         # Eigenvalues stats
         eigenvals_str = [str(eval) for eval in eigenvals.tolist()]
