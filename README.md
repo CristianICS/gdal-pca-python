@@ -67,6 +67,8 @@ seven bands: "C", "B", "G", "Y", "R", "RE", "N1".
 
 The image has radiometric and atmospheric corrections (DOS method - Chavez, 1989).
 
+![Example of original image and PCA derived product.](data-example.png)
+
 ## Further development
 
 - Scaling the data.
