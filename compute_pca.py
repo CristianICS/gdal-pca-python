@@ -1,8 +1,8 @@
 """____________________________________________________________________________
-Script Name:        04_pca.py
+Script Name:        compute_pca.py
 Description:        Compute PCA with all band's combinations.
-Requirements:       GDAL version >= "3.1.4", Dask, scipy, numpy
-Outputs:            High resolution image.
+Requirements:       GDAL version >= "3.1.4", Dask, numpy
+Outputs:            Image with PCs as bands.
 ____________________________________________________________________________"""
 # Parameters
 # -----------------------------------------------------------------------------
