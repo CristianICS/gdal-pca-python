@@ -56,7 +56,7 @@ combis_dict = pca.combis(bands, 3, out_dir)
 # Apply only the first 10 combinations
 combis_subset = {k: v for k, v in combis_dict.items() if k <= 10}
 
-for combi_id, combi_bands in combis_dict.items():
+for combi_id, combi_bands in combis_subset.items():
     # Create PCA image
     print(f"\nWriting PCA from combi {combi_id} bands\n")
     print(f"==========================================\n")
