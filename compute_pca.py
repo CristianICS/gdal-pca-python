@@ -6,8 +6,8 @@ Outputs:            High resolution image.
 ____________________________________________________________________________"""
 # Parameters
 # -----------------------------------------------------------------------------
-mul_img = "D:/arqueologia_2022/wv3/015105921010_01/17MAY29064346/Pansharpen/17MAY29064346-M2AS-015105921010_01_P001_wBrovey.tif"
-out_dir = "D:/arqueologia_2022/wv3/015105921010_01/17MAY29064346/PCA"
+mul_img = "./data/wv3_img.tif"
+out_dir = "./PCA"
 bands = ["C", "B", "G", "Y", "R", "RE", "N1"] # Ordered from first band to last band
 
 # Main script
