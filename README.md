@@ -12,6 +12,8 @@ following parameters:
 - `out_dir` = Output directory folder.
 - `bands`   = Image custom band keys in the same order as image bands.
 
+Note: `pca.py` contains the PCA required functions.
+
 ## Procedure
 
 First, the output directory is created and the band combinations are computed.
