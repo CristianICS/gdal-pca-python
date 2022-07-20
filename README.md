@@ -59,6 +59,14 @@ following packages:
 
 Finally run code with `python path/to/compute_pca.py`.
 
+## Test data
+
+WorldView3 clipped image. It's derived from a pansharpened product
+(0.3m pixel size) computed with "weighted" Brovey method. It contains 
+seven bands: "C", "B", "G", "Y", "R", "RE", "N1".
+
+The image has radiometric and atmospheric corrections (DOS method - Chavez, 1989).
+
 ## Further development
 
 - Scaling the data.
