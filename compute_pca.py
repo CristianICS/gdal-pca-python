@@ -13,16 +13,33 @@ bands = ["C", "B", "G", "Y", "R", "RE", "N1"] # Ordered from first band to last 
 # Main script
 # -----------------------------------------------------------------------------
 # Import packages
-import os, sys
-# Add modules
-modules_path = os.path.abspath(os.path.join(os.path.normpath(__file__), os.pardir, 'modules'))
-sys.path.append(modules_path)
-import handlefiles as hf
+import os
+# Add pca functions
 import pca
+
+# Create directories
+def create_dir(dir_path: str, readme: str = None):
+    """
+    Create directories from path
+    :dirPath: String with the new directory
+    :readme: String to pass in README file
+
+    **Important**: Dir is not created if it exists.
+    """
+    system_path = os.path.normpath(dir_path)
+    if (not os.path.exists(system_path)):
+        # Create directory
+        os.makedirs(system_path)
+
+    # Write README file
+    if readme != None:
+        file = open(os.path.join(system_path,'README.txt'), 'w')
+        file.write(readme)
+        file.close()
 
 # Compute PCA
 # -----------------------------------------------------------------------------
-hf.create_dir(out_dir,
+create_dir(out_dir,
     "Images with Principal Components.\n" +
     "Image is named with the combination id which identifies the bands with PCA" +
     "has computed.\n" +
