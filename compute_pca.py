@@ -17,6 +17,10 @@ import os
 # Add pca functions
 import pca
 
+# Handle working directory
+file_dir = os.path.abspath(os.path.join(__file__,os.pardir))
+os.chdir(file_dir)
+
 # Create directories
 def create_dir(dir_path: str, readme: str = None):
     """
@@ -49,11 +53,14 @@ create_dir(out_dir,
 
 combis_dict = pca.combis(bands, 3, out_dir)
 
+# Apply only the first 10 combinations
+combis_subset = {k: v for k, v in combis_dict.items() if k <= 10}
+
 for combi_id, combi_bands in combis_dict.items():
     # Create PCA image
     print(f"\nWriting PCA from combi {combi_id} bands\n")
     print(f"==========================================\n")
-    img_out_name = os.path.basename(mul_img)[0:39] + '_PCA_' + str(combi_id) + '.tif'
+    img_out_name = os.path.basename(mul_img).split('.')[0] + '_PCA_' + str(combi_id) + '.tif'
     img_out_path = os.path.join(out_dir, img_out_name)
     eigenvals, eigenvectors = pca.compute_pca(mul_img, combi_bands, img_out_path)
     # Write stats
