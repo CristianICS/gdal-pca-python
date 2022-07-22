@@ -94,7 +94,7 @@ WorldView3 clipped image. It's derived from a pansharpened product
 (0.3m pixel size) computed with "weighted" Brovey method. It contains 
 seven bands: "C", "B", "G", "Y", "R", "RE", "N1".
 
-The image has radiometric and atmospheric corrections (DOS method - Chavez, 1989).
+The image has radiometric and atmospheric corrections (DOS method - Chavez, 1996).
 
 ![Example of original image and PCA derived product.](data-example.png)
 
@@ -104,8 +104,16 @@ The image has radiometric and atmospheric corrections (DOS method - Chavez, 1989
 
 ## References
 
-- [A Step-by-Step Explanation of Principal Component Analysis (PCA)](https://builtin.com/data-science/step-step-explanation-principal-component-analysis)
--[The Basics: Principal Component Analysis](https://towardsdatascience.com/the-basics-principal-component-analysis-83c270f1a73c?gi=84c269d8c697)
-- [PCA with R](https://www.datacamp.com/community/tutorials/pca-analysis-r)
-- [Does mean centering or feature scaling affect a Principal Component Analysis?](https://sebastianraschka.com/faq/docs/pca-scaling.html)
-- [Eigenvalues and eigenvectors in PCA](https://towardsdatascience.com/eigenvalues-and-eigenvectors-378e851bf372)
+Chavez, P S. Image-based atmospheric corrections-revisited and improved.
+Photogrammetric engineering and remote sensing, 1996, vol. 62, no 9,
+p. 1025-1035.
+
+[A Step-by-Step Explanation of Principal Component Analysis (PCA)](https://builtin.com/data-science/step-step-explanation-principal-component-analysis)
+
+[The Basics: Principal Component Analysis](https://towardsdatascience.com/the-basics-principal-component-analysis-83c270f1a73c?gi=84c269d8c697)
+
+[PCA with R](https://www.datacamp.com/community/tutorials/pca-analysis-r)
+
+[Does mean centering or feature scaling affect a Principal Component Analysis?](https://sebastianraschka.com/faq/docs/pca-scaling.html)
+
+[Eigenvalues and eigenvectors in PCA](https://towardsdatascience.com/eigenvalues-and-eigenvectors-378e851bf372)
